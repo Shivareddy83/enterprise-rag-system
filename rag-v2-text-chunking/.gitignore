@@ -1,0 +1,33 @@
+# .gitignore
+
+```gitignore
+# Virtual Environment
+.venv/
+venv/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+
+# Environment Variables
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Build Files
+*.log
+```
+
+---
+
+# requirements.txt
+
+```text
+PyPDF2>=3.0.1
+```
