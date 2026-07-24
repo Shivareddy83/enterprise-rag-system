@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+logs/*.log
+
+# Python Cache
+.pytest_cache/
+.mypy_cache/
+
+# Environment Variables
+.env
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Chroma Database
+database/chroma_db/
+
+# Output Files
+output/
+!output/.gitkeep
