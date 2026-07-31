@@ -1,0 +1,12 @@
+Enterprise RAG System - Version 3
+Topic: Keyword Search
+Version 3 introduces keyword-based retrieval. Keyword search scans every text chunk and returns
+the chunks that contain the user's query. Example keywords: Python Artificial Intelligence
+Automation Data Science Machine Learning Python is a popular programming language used for
+web development, automation, artificial intelligence, data science, scripting, and backend
+development. A Retrieval-Augmented Generation (RAG) system first reads documents, splits them
+into chunks, performs keyword or semantic search, retrieves the most relevant chunks, and then
+sends those chunks to a Large Language Model to generate an answer. Keyword search is simple,
+fast, and easy to understand, but it cannot understand meaning or context. Later versions of this
+project will replace keyword search with embeddings and semantic search.
+

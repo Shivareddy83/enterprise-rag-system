@@ -1,0 +1,10 @@
+google-genai
+python-dotenv
+sentence-transformers
+chromadb
+PyPDF2
+numpy
+torch
+transformers
+huggingface-hub
+tqdm

@@ -1,0 +1,47 @@
+{
+    "ids": [
+        [
+            "1887cf2d-92fd-4d21-ac9e-3dcdb234b623",
+            "1ac2fb2e-afa2-4b2a-a493-459fc562d0ac",
+            "5f4e41c5-bdaf-4711-85fa-3639e0c7508c"
+        ]
+    ],
+    "distances": [
+        [
+            1.0517486447152204,
+            1.4046434769184357,
+            1.6939609869667307
+        ]
+    ],
+    "metadatas": [
+        [
+            {
+                "chunk_id": 1,
+                "length": 500
+            },
+            {
+                "chunk_id": 2,
+                "length": 480
+            },
+            {
+                "chunk_id": 3,
+                "length": 80
+            }
+        ]
+    ],
+    "embeddings": null,
+    "documents": [
+        [
+            "Enterprise RAG System - Version 3\nTopic: Keyword Search\nVersion 3 introduces keyword-based retrieval. Keyword search scans every text chunk and returns\nthe chunks that contain the user's query. Example keywords: Python Artificial Intelligence\nAutomation Data Science Machine Learning Python is a popular programming language used for\nweb development, automation, artificial intelligence, data science, scripting, and backend\ndevelopment. A Retrieval-Augmented Generation (RAG) system first reads docu",
+            ", scripting, and backend\ndevelopment. A Retrieval-Augmented Generation (RAG) system first reads documents, splits them\ninto chunks, performs keyword or semantic search, retrieves the most relevant chunks, and then\nsends those chunks to a Large Language Model to generate an answer. Keyword search is simple,\nfast, and easy to understand, but it cannot understand meaning or context. Later versions of this\nproject will replace keyword search with embeddings and semantic search.\n\n",
+            " this\nproject will replace keyword search with embeddings and semantic search.\n\n"
+        ]
+    ],
+    "uris": null,
+    "data": null,
+    "included": [
+        "documents",
+        "metadatas",
+        "distances"
+    ]
+}

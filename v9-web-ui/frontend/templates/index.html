@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ======================================================
+        META
+    ======================================================= -->
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Enterprise Knowledge Platform</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Highlight.js -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+
+    <!-- Main CSS -->
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- ======================================================
+        SIDEBAR
+    ======================================================= -->
+
+    <aside class="sidebar"
+           id="sidebar">
+
+        <!-- Sidebar Header -->
+
+        <div class="sidebar-header">
+
+            <div class="logo">
+
+                🧠 EKP
+
+            </div>
+
+            <h2>
+
+                Enterprise Knowledge Platform
+
+            </h2>
+
+            <p>
+
+                Version 9 • Enterprise Web UI
+
+            </p>
+
+            <button
+                id="sidebarToggle"
+                class="sidebar-toggle"
+                aria-label="Toggle Sidebar">
+
+                ☰
+
+            </button>
+
+        </div>
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+            <input
+                id="chatSearch"
+                type="text"
+                placeholder="Search chats...">
+
+        </div>
+
+        <!-- Navigation -->
+
+        <nav class="navigation">
+
+            <ul>
+
+                <li>
+
+                    <a href="#">
+
+                        🏠 Dashboard
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="#">
+
+                        💬 Chat
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="#">
+
+                        📄 Documents
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="#">
+
+                        ⚙ Settings
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <!-- History -->
+
+        <section class="history">
+
+            <h3>
+
+                Recent Chats
+
+            </h3>
+
+            <ul id="historyList">
+
+            </ul>
+
+        </section>
+
+        <!-- Export -->
+
+        <div class="export-buttons">
+
+            <button id="exportTxt">
+
+                📄 Export TXT
+
+            </button>
+
+            <button id="exportJson">
+
+                📑 Export JSON
+
+            </button>
+
+            <button id="exportPdf">
+
+                📕 Export PDF
+
+            </button>
+
+        </div>
+
+    </aside>
+
+    <!-- ======================================================
+        MAIN CONTAINER STARTS HERE
+    ======================================================= -->
+
+    <main class="main-container">
+        <!-- ======================================================
+            HEADER
+        ======================================================= -->
+
+        <header class="header">
+
+            <div>
+
+                <h1>
+
+                    Enterprise Knowledge Platform
+
+                </h1>
+
+                <p>
+
+                    Semantic Search • RAG • FastAPI • Gemini
+
+                </p>
+
+            </div>
+
+            <div class="header-actions">
+
+                <button
+                    id="themeToggle"
+                    class="theme-toggle"
+                    aria-label="Toggle Theme">
+
+                    🌙
+
+                </button>
+
+                <span
+                    id="statusIndicator"
+                    class="online-status">
+
+                    Checking...
+
+                </span>
+
+            </div>
+
+        </header>
+
+        <!-- ======================================================
+            WELCOME SECTION
+        ======================================================= -->
+
+        <section class="welcome-section">
+
+            <h2>
+
+                Enterprise AI Assistant
+
+            </h2>
+
+            <p>
+
+                Welcome to Enterprise Knowledge Platform.
+                Upload your PDF documents and ask questions using
+                Retrieval-Augmented Generation (RAG).
+
+            </p>
+
+            <div class="examples">
+
+                <button class="example-btn">
+
+                    What is Python?
+
+                </button>
+
+                <button class="example-btn">
+
+                    Explain FastAPI
+
+                </button>
+
+                <button class="example-btn">
+
+                    Summarize my PDF
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- ======================================================
+            PDF UPLOAD
+        ======================================================= -->
+
+        <section class="upload-section">
+
+            <h3>
+
+                📄 Upload Document
+
+            </h3>
+
+            <input
+                type="file"
+                id="pdfFile"
+                accept=".pdf">
+
+            <button
+                id="uploadButton">
+
+                Upload PDF
+
+            </button>
+
+            <div id="uploadStatus">
+
+            </div>
+
+        </section>
+
+        <!-- ======================================================
+            CHAT CONTAINER
+        ======================================================= -->
+
+        <section
+            class="chat-container"
+            id="chatContainer"
+            aria-live="polite">
+
+            <div class="message ai-message">
+
+                <div class="avatar">
+
+                    🤖
+
+                </div>
+
+                <div class="text">
+
+                    <strong>
+
+                        Enterprise AI Assistant
+
+                    </strong>
+
+                    <br><br>
+
+                    Welcome to Enterprise Knowledge Platform.
+
+                    <br><br>
+
+                    Upload one or more PDF documents and ask
+                    questions about their contents.
+
+                    <br><br>
+
+                    I use:
+
+                    <ul>
+
+                        <li>Semantic Search</li>
+
+                        <li>ChromaDB</li>
+
+                        <li>Sentence Transformers</li>
+
+                        <li>Gemini AI</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ======================================================
+            TYPING INDICATOR
+        ======================================================= -->
+
+        <section
+            class="typing-indicator"
+            id="typingIndicator">
+
+            <span></span>
+
+            <span></span>
+
+            <span></span>
+
+        </section>
+            <!-- ======================================================
+            INPUT SECTION
+        ======================================================= -->
+
+        <section class="input-section">
+
+            <textarea
+
+                id="questionInput"
+
+                rows="2"
+
+                autocomplete="off"
+
+                spellcheck="false"
+
+                placeholder="Ask anything about your uploaded documents...">
+
+            </textarea>
+
+            <div class="buttons">
+
+                <button
+
+                    id="sendButton"
+
+                    type="button">
+
+                    Send
+
+                </button>
+
+                <button
+
+                    id="clearButton"
+
+                    type="button">
+
+                    Clear Chat
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- ======================================================
+    FOOTER
+======================================================= -->
+
+<footer>
+
+    Built with Python • FastAPI • ChromaDB • Sentence Transformers • Gemini AI
+
+</footer>
+
+<!-- ======================================================
+    TOAST CONTAINER
+======================================================= -->
+
+<div id="toastContainer"></div>
+
+<!-- ======================================================
+    MARKED.JS
+======================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<!-- ======================================================
+    HIGHLIGHT.JS
+======================================================= -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+
+<!-- ======================================================
+    JSPDF
+======================================================= -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- ======================================================
+    MAIN JAVASCRIPT
+======================================================= -->
+
+<script src="/static/js/script.js"></script>
+
+</body>
+
+</html>

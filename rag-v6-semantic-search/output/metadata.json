@@ -1,0 +1,6 @@
+{
+    "total_chunks": 3,
+    "total_embeddings": 3,
+    "embedding_dimension": 384,
+    "model": 384
+}
