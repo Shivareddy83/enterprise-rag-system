@@ -263,9 +263,7 @@ async function checkServerHealth() {
         );
 
         if (!response.ok) {
-
-            throw new Error();
-
+            throw new Error(await readApiError(response, `Backend returned HTTP ${response.status}.`));
         }
 
         statusIndicator.textContent =
@@ -278,24 +276,10 @@ async function checkServerHealth() {
 
     }
 
-    catch {
-
-        statusIndicator.textContent =
-
-            "🔴 Offline";
-
-        statusIndicator.style.color =
-
-            "#ef4444";
-
-        showToast(
-
-            "Backend server offline.",
-
-            "warning"
-
-        );
-
+    catch (error) {
+        statusIndicator.textContent = "🔴 Offline";
+        statusIndicator.style.color = "#ef4444";
+        showToast(error.message || "Backend server offline.", "warning");
     }
 
 }
@@ -356,14 +340,10 @@ async function uploadPDF() {
         );
 
         if (!response.ok) {
-
-            throw new Error();
-
+            throw new Error(await readApiError(response, "Upload failed."));
         }
 
-        const data =
-
-            await response.json();
+        const data = await response.json();
 
         uploadStatus.textContent =
 
@@ -508,6 +488,18 @@ async function sendMessage() {
 }
 
 
+async function readApiError(response, fallback) {
+    try {
+        const data = await response.json();
+        if (typeof data.detail === "string") return data.detail;
+        if (typeof data.message === "string") return data.message;
+    } catch (_) {
+        // Ignore non-JSON responses.
+    }
+    return fallback;
+}
+
+
 /* ==========================================================
    ASK QUESTION API
 ========================================================== */
@@ -537,13 +529,7 @@ async function askQuestion(question) {
     );
 
     if (!response.ok) {
-
-        throw new Error(
-
-            "Unable to connect to Enterprise RAG Server."
-
-        );
-
+        throw new Error(await readApiError(response, `Backend returned HTTP ${response.status}.`));
     }
 
     return await response.json();

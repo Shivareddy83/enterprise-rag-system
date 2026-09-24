@@ -187,3 +187,6 @@ service_account.json
 # -----------------------------------------------------
 
 ehthumbs.db
+data/uploads/
+
+database/chroma_db/

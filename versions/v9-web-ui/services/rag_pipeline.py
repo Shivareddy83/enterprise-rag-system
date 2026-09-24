@@ -1,94 +1,33 @@
-"""
-RAG Pipeline
-
-Enterprise RAG System
-Version 9
-
-Coordinates the Retrieval-Augmented Generation workflow.
-"""
+"""Retrieval-Augmented Generation pipeline."""
 
 import logging
 
-from services.llm_service import LLMService
 from prompts.prompt_builder import PromptBuilder
+from services.llm_service import LLMService
 
 logger = logging.getLogger("enterprise_rag.pipeline")
 
 
 class RAGPipeline:
-    """
-    Enterprise RAG Pipeline.
-    """
-
-    def __init__(self, semantic_search):
+    def __init__(self, semantic_search, llm: LLMService | None = None):
         self.semantic_search = semantic_search
-        self.llm = LLMService()
+        self.llm = llm or LLMService()
         self.prompt_builder = PromptBuilder()
 
-    # =====================================================
-    # ANSWER QUESTION
-    # =====================================================
-
-    def answer(
-        self,
-        question: str,
-        top_k: int = 3,
-    ) -> dict:
-        """
-        Answer a user's question using RAG.
-
-        Returns:
-            dict
-        """
-
-        if not question.strip():
+    def answer(self, question: str, top_k: int = 3) -> dict:
+        if not question or not question.strip():
             raise ValueError("Question cannot be empty.")
 
-        logger.info("Searching relevant documents...")
-
-        search_results = self.semantic_search.search(
-            query=question,
-            top_k=top_k,
-        )
-
+        search_results = self.semantic_search.search(query=question, top_k=top_k)
         documents = []
-
-        if search_results.get("documents"):
-
-            docs = search_results["documents"][0]
-
-            documents = [doc for doc in docs if doc]
+        docs = search_results.get("documents") if search_results else None
+        if docs and docs[0]:
+            documents = [doc for doc in docs[0] if doc]
 
         context = "\n\n".join(documents)
-
-        logger.info("Building prompt...")
-
-        prompt = self.prompt_builder.build_prompt(
-            context=context,
-            question=question,
-        )
-
-        logger.info("Generating answer using Gemini...")
-
+        prompt = self.prompt_builder.build_prompt(context=context, question=question)
         answer = self.llm.generate_answer(prompt)
-
-        return {
-            "question": question,
-            "answer": answer,
-            "context": documents,
-            "retrieved_chunks": len(documents),
-        }
-
-    # =====================================================
-    # HEALTH CHECK
-    # =====================================================
+        return {"question": question, "answer": answer, "context": documents, "retrieved_chunks": len(documents)}
 
     def health_check(self) -> bool:
-        """
-        Verify the pipeline is operational.
-        """
-
-        try:
-            return self.llm.health_check()
-        except Exception:
-            return False
+        return self.llm.health_check()

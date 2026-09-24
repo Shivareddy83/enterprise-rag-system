@@ -1,75 +1,38 @@
-"""
-Document Ingestion Service
-
-Enterprise RAG System
-Version 9
-
-Reads PDFs and stores embeddings in ChromaDB.
-"""
+"""PDF ingestion service."""
 
 import logging
 from pathlib import Path
 
+from services.chroma_service import ChromaService
+from services.embedding_service import EmbeddingService
 from services.pdf_reader import PDFReader
 from services.text_chunker import TextChunker
-from services.embedding_service import EmbeddingService
-from services.chroma_service import ChromaService
 
 logger = logging.getLogger("enterprise_rag.ingestion")
 
 
 class IngestionService:
-    """
-    Handles complete document indexing.
-    """
-
-    def __init__(self):
-
+    def __init__(self, embedding_service: EmbeddingService | None = None, chroma_service: ChromaService | None = None):
         self.pdf_reader = PDFReader()
         self.chunker = TextChunker()
-        self.embedding_service = EmbeddingService()
-        self.chroma_service = ChromaService()
-
-    # =====================================================
-    # INGEST PDF
-    # =====================================================
+        self.embedding_service = embedding_service or EmbeddingService()
+        self.chroma_service = chroma_service or ChromaService()
 
     def ingest_pdf(self, pdf_path: str) -> dict:
-        """
-        Index a PDF into the vector database.
-        """
-
-        logger.info("Reading PDF...")
-
-        text = self.pdf_reader.extract_text(pdf_path)
-
+        path = Path(pdf_path)
+        text = self.pdf_reader.extract_text(str(path))
         if not text.strip():
             raise ValueError("No text found in PDF.")
-
-        logger.info("Chunking document...")
-
         chunks = self.chunker.chunk_text(text)
-
-        logger.info(
-            "Generating embeddings for %d chunks...",
-            len(chunks),
-        )
-
-        embeddings = self.embedding_service.generate_embeddings(
-            chunks
-        )
-
-        logger.info("Saving vectors...")
-
+        if not chunks:
+            raise ValueError("PDF produced no text chunks.")
+        embeddings = self.embedding_service.generate_embeddings(chunks)
         total_vectors = self.chroma_service.store(
-            chunks=chunks,
-            embeddings=embeddings,
-            source_document=Path(pdf_path).name,
+            chunks=chunks, embeddings=embeddings, source_document=path.name
         )
-
         return {
             "status": "success",
-            "document": Path(pdf_path).name,
+            "document": path.name,
             "characters": len(text),
             "chunks": len(chunks),
             "vectors": total_vectors,
