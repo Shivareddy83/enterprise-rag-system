@@ -2,7 +2,7 @@ a# 🚀 Enterprise RAG System
 
 <p align="center">
 
-### Build a Production-Ready Retrieval-Augmented Generation (RAG) System from Scratch
+### Building an Enterprise RAG System Step by Step
 
 *A version-by-version learning repository that demonstrates how to design, build, document, and deploy an Enterprise RAG system using modern AI engineering practices.*
 
@@ -164,7 +164,7 @@ The project is built incrementally — each version adds one capability on top o
 | Phase | Version | Focus | Status |
 |---|---|---|:---:|
 | Foundation | v1 | Read & extract text from PDFs | ✅ Completed |
-| Foundation | v2 | Text chunking | 🚧 In Progress |
+| Foundation | v2 | Text chunking | ✅ Verified locally |
 | Foundation | v3 | Keyword search | ⏳ Planned |
 | Intelligence | v4 | Embedding generation | ⏳ Planned |
 | Intelligence | v5 | Vector database integration | ⏳ Planned |
@@ -185,6 +185,8 @@ v1 → v2 → v3 → v4 → v5 → v6 → v7 → v8 → v9 → v10
 ---
 
 ## ⚙️ Technology Stack
+
+The list below includes the broader technologies planned or considered for the roadmap. It does **not** mean every item is implemented in the current code. The currently verified implementation uses Python and PyPDF2; v2 text chunking has been run locally and its output inspected.
 
 | Layer | Technologies |
 |---|---|
